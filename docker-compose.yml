@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   db:
     container_name: postgres_container
@@ -12,7 +11,7 @@ services:
       - "5432:5432"
 
   pgadmin:
-    container_name: pgadmin4_container
+    container_name: pgadmin4_container_v2
     image: dpage/pgadmin4
     restart: always
     environment:
@@ -20,3 +19,14 @@ services:
       PGADMIN_DEFAULT_PASSWORD: root_password
     ports:
       - "8080:80"
+  php:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    container_name: php_container
+    restart: always
+    volumes:
+      - ./project:/var/www/html
+    ports:
+      - "80:80"
+
